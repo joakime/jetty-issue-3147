@@ -1,0 +1,52 @@
+<html>
+<head>
+</head>
+<body>
+<script>
+var websocket;
+function initWebSocket() {
+    console.log("initWebSocket");
+    var wsUri = "ws://localhost:8080/broadcast";
+    websocket = new WebSocket(wsUri);
+
+    websocket.onmessage = onMessage;
+    websocket.onerror = onError;
+    websocket.onopen = onOpen;
+    websocket.onclose = onClose;
+    console.log("initWebSocket end");
+}
+
+function onMessage(e) {
+    console.log("onMessage from webSocket");
+    console.log(e);
+}
+
+function onError(e) {
+    console.log("onError from webSocket");
+    console.log(e);
+}
+
+function onOpen(e) {
+    console.log("onOpen from webSocket");
+    console.log(e);
+    // send(); // necessary for receiving messages from the server
+}
+
+function onClose(e) {
+    console.log("onClose from webSocket");
+    console.log(e);
+    initWebSocket();
+}
+
+function send() {
+    websocket.send("Message from Browser client!");
+}
+
+initWebSocket();
+
+</script>
+
+<input type="button" onclick="send()" value="Send"></input>
+
+</body>
+</html>
