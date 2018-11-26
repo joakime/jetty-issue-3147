@@ -2,6 +2,7 @@ package com.example.ws;
 
 import java.net.URI;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import javax.websocket.ContainerProvider;
 import javax.websocket.Session;
@@ -19,8 +20,8 @@ public class ClientStarter {
 
         try (Session session = container.connectToServer(BroadcastClientEndpoint.class, URI.create(uri))) {
             for (int i = 1; i <= 1000; ++i) {
+                TimeUnit.SECONDS.sleep(10);
                 session.getBasicRemote().sendText("Message from JavaClient #" + i);
-                Thread.sleep(3000);
             }
         }
 

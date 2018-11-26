@@ -18,7 +18,7 @@ public class BroadcastClientEndpoint {
 
     @OnOpen
     public void onOpen(final Session session) throws IOException, EncodeException {
-        session.getBasicRemote().sendText("Hello from JavaClient!");
+        // session.getBasicRemote().sendText("Hello from JavaClient!");
     }
 
     @OnMessage
