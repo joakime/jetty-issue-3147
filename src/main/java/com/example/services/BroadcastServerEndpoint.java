@@ -40,6 +40,10 @@ public class BroadcastServerEndpoint {
     public void onMessage(final String message, final Session client) throws IOException, EncodeException {
         log.info(String.format("Server received message '%s'", message));
         for (final Session otherSession : session.getOpenSessions()) {
+            if(otherSession == this.session) {
+                continue; // skip (no point reporting message back to yourself)
+            }
+
             if(otherSession == null) {
                 log.info("Other Session was removed before I got a chance to use it");
                 continue; // skip (this session was removed and invalidated between .getOpenSessions and actual iteration step)
