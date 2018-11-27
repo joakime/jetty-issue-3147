@@ -3,6 +3,10 @@
 </head>
 <body>
 <script>
+var urlParams = new URLSearchParams(window.location.search);
+var clientId = urlParams.get('clientId');
+if (clientId == null) clientId = "BROWSER";
+
 var websocket;
 function initWebSocket() {
     console.log("initWebSocket");
@@ -39,7 +43,7 @@ function onClose(e) {
 }
 
 function send() {
-    websocket.send("Message from Browser client!");
+    websocket.send("Message from Browser Client [" + clientId + "]");
 }
 
 initWebSocket();
